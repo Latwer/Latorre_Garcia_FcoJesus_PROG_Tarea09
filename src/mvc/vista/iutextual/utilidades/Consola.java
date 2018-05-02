@@ -1,4 +1,4 @@
-package mvc.vista.utilidades;
+package mvc.vista.iutextual.utilidades;
 
 import mvc.modelo.dominio.Cliente;
 import mvc.modelo.dominio.DireccionPostal;
@@ -6,7 +6,7 @@ import mvc.modelo.dominio.ExcepcionAlquilerVehiculos;
 import mvc.modelo.dominio.vehiculo.DatosTecnicosVehiculo;
 import mvc.modelo.dominio.vehiculo.TipoVehiculo;
 import mvc.modelo.dominio.vehiculo.Vehiculo;
-import mvc.vista.Opcion;
+import mvc.vista.iutextual.Opcion;
 
 /**
  * @author Francisco Jesus Latorre Garcia <franlatorregarcia@gmail.com>

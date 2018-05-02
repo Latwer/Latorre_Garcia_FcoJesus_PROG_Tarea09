@@ -1,4 +1,4 @@
-package mvc.vista.utilidades;
+package mvc.vista.iutextual.utilidades;
 
 import java.io.BufferedReader;
 import java.io.IOException;

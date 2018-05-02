@@ -1,5 +1,6 @@
-package mvc.vista;
+package mvc.vista.iutextual;
 
+import mvc.vista.iutextual.IUTextual;
 import mvc.modelo.dominio.ExcepcionAlquilerVehiculos;
 
 /**
