@@ -163,7 +163,7 @@ public class IUTextual implements IVistaAlquilerVehiculos {
         System.out.println("");
     }
 
-    @Override
+    //@Override
     public void obtenerAlquileresAbiertos() {
         Consola.mostrarCabecera("ALQUILERES ABIERTOS");
 
@@ -172,7 +172,7 @@ public class IUTextual implements IVistaAlquilerVehiculos {
         });
     }
 
-    @Override
+    //@Override
     public void obtenerAlquileresCliente() {
         String dni = Consola.leerDni();
 
@@ -191,7 +191,7 @@ public class IUTextual implements IVistaAlquilerVehiculos {
         }
     }
 
-    @Override
+    //@Override
     public void obtenerAlquileresVehiculo() {
         String matricula = Consola.leerMatricula();
 

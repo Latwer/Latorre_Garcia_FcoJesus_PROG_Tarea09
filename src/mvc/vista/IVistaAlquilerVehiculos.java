@@ -11,10 +11,10 @@ public interface IVistaAlquilerVehiculos {
 
     void comenzar();
     
-    void obtenerAlquileresAbiertos();
+    //void obtenerAlquileresAbiertos();
     
-    void obtenerAlquileresCliente();
+    //void obtenerAlquileresCliente();
     
-    void obtenerAlquileresVehiculo();
+    //void obtenerAlquileresVehiculo();
 
 }

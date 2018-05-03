@@ -21,6 +21,10 @@ public class Cliente implements Serializable {
         identificador = cliente.getIdentificador();
     }
 
+    public static int getUltimoIdentificador() {
+        return ultimoIdentificador;
+    }
+
     private void asignarNuevoIdentificador() {
         ultimoIdentificador++;
         identificador = ultimoIdentificador;
@@ -88,6 +92,7 @@ public class Cliente implements Serializable {
         return String.format("Identificador: %d, Nombre: %s, DNI: %s, %s",
                 identificador, nombre, dni, direccionPostal);
     }
+
     @Override
     public boolean equals(Object otro) {
         if (otro == null || !(otro instanceof Cliente)) {
