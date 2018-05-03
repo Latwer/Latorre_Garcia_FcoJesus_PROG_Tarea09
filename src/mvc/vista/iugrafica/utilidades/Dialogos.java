@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 /**
  * @author Francisco Jesus Latorre Garcia <franlatorregarcia@gmail.com>
  */
-
 public class Dialogos {
 
     public static void mostrarDialogoError(String titulo, String contenido, Stage propietario) {
