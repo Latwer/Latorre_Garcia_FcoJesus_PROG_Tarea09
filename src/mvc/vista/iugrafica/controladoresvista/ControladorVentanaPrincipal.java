@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import mvc.modelo.dominio.Cliente;
+import mvc.modelo.dominio.vehiculo.Vehiculo;
 import mvc.vista.iugrafica.IUGrafica;
 import mvc.vista.iugrafica.utilidades.Dialogos;
 
@@ -22,6 +23,9 @@ public class ControladorVentanaPrincipal {
     private ControladorListadoClientes cListadoClientes;
     private ControladorAnadirCliente cAnadirCliente;
     private ControladorMostrarCliente cMostrarCliente;
+    private ControladorListadoVehiculos cListadoVehiculos;
+    private ControladorAnadirVehiculo cAnadirVehiculo;
+    private ControladorMostrarVehiculo cMostrarVehiculo;
     private Stage listadoClientes, anadirCliente, mostrarCliente, listadoVehiculos,
             anadirVehiculo, mostrarVehiculo, listadoAlquileres, anadirAlquiler, mostrarAlquiler;
 
@@ -31,6 +35,7 @@ public class ControladorVentanaPrincipal {
 
     @FXML
     private void listarClientes() {
+        cListadoClientes.actualizaClientes();
         listadoClientes.showAndWait();
     }
 
@@ -58,16 +63,28 @@ public class ControladorVentanaPrincipal {
 
     @FXML
     private void listarVehiculos() {
+        cListadoVehiculos.actualizaVehiculos();
         listadoVehiculos.showAndWait();
     }
 
     @FXML
     private void anadirVehiculo() {
+        cAnadirVehiculo.setVehiculo(null);
         anadirVehiculo.showAndWait();
     }
 
     @FXML
     private void buscarVehiculo() {
+        String matricula = Dialogos.mostrarDialogoTexto("Buscar vehículo", "Introduce la matrícula del vehículo a buscar");
+        if (matricula != null) {
+            Vehiculo vehiculo = IUGrafica.controladorMVC.buscarVehiculo(matricula);
+            if (vehiculo != null) {
+                cMostrarVehiculo.setVehiculo(vehiculo);
+                mostrarVehiculo.showAndWait();
+            } else {
+                Dialogos.mostrarDialogoError("Vehículo no encontrado", "No existe ningún vehículo con esa matrícula");
+            }
+        }
     }
 
     @FXML
@@ -89,6 +106,9 @@ public class ControladorVentanaPrincipal {
             crearListadoClientes();
             crearAnadirCliente();
             crearMostrarCliente();
+            crearListadoVehiculos();
+            crearAnadirVehiculo();
+            crearMostrarVehiculo();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -139,5 +159,41 @@ public class ControladorVentanaPrincipal {
         listadoClientes.setTitle("Listar clientes");
         listadoClientes.initModality(Modality.APPLICATION_MODAL);
         listadoClientes.setScene(escenaListadoClientes);
+    }
+
+    private void crearListadoVehiculos() throws IOException {
+        listadoVehiculos = new Stage();
+        FXMLLoader cargadorListadoVehiculos = new FXMLLoader(
+                getClass().getResource("/mvc/vista/iugrafica/vistas/ListadoVehiculos.fxml"));
+        VBox raizListadoVehiculos = (VBox) cargadorListadoVehiculos.load();
+        cListadoVehiculos = cargadorListadoVehiculos.getController();
+        Scene escenaListadoVehiculos = new Scene(raizListadoVehiculos);
+        listadoVehiculos.setTitle("Listar vehículos");
+        listadoVehiculos.initModality(Modality.APPLICATION_MODAL);
+        listadoVehiculos.setScene(escenaListadoVehiculos);
+    }
+
+    private void crearAnadirVehiculo() throws IOException {
+        anadirVehiculo = new Stage();
+        FXMLLoader cargadorAnadirVehiculo = new FXMLLoader(
+                getClass().getResource("/mvc/vista/iugrafica/vistas/AnadirVehiculo.fxml"));
+        VBox raizAnadirVehiculo = (VBox) cargadorAnadirVehiculo.load();
+        cAnadirVehiculo = cargadorAnadirVehiculo.getController();
+        Scene escenaAnadirVehiculo = new Scene(raizAnadirVehiculo);
+        anadirVehiculo.setTitle("Añadir vehículo");
+        anadirVehiculo.initModality(Modality.APPLICATION_MODAL);
+        anadirVehiculo.setScene(escenaAnadirVehiculo);
+    }
+
+    private void crearMostrarVehiculo() throws IOException {
+        mostrarVehiculo = new Stage();
+        FXMLLoader cargadorMostrarVehiculo = new FXMLLoader(
+                getClass().getResource("/mvc/vista/iugrafica/vistas/MostrarVehiculo.fxml"));
+        VBox raizMostrarVehiculo = (VBox) cargadorMostrarVehiculo.load();
+        cMostrarVehiculo = cargadorMostrarVehiculo.getController();
+        Scene escenaMostrarVehiculo = new Scene(raizMostrarVehiculo);
+        mostrarVehiculo.setTitle("Mostrar vehículo");
+        mostrarVehiculo.initModality(Modality.APPLICATION_MODAL);
+        mostrarVehiculo.setScene(escenaMostrarVehiculo);
     }
 }
