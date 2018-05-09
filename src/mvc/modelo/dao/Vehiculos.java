@@ -93,7 +93,8 @@ public class Vehiculos {
         if (vehiculos.containsKey(matricula)) {
             return vehiculos.get(matricula);
         } else {
-            throw new ExcepcionAlquilerVehiculos("El vehículo a borrar no existe");
+            return null;
         }
     }
+
 }

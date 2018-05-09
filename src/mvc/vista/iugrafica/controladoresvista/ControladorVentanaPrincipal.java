@@ -75,6 +75,7 @@ public class ControladorVentanaPrincipal {
     @FXML
     private void anadirVehiculo() {
         cAnadirVehiculo.setVehiculo(null);
+        cAnadirVehiculo.anadirVehiculo();
         anadirVehiculo.showAndWait();
     }
 
@@ -84,6 +85,7 @@ public class ControladorVentanaPrincipal {
         if (matricula != null) {
             Vehiculo vehiculo = IUGrafica.controladorMVC.buscarVehiculo(matricula);
             if (vehiculo != null) {
+                cMostrarVehiculo.rellenarVehiculo(vehiculo);
                 cMostrarVehiculo.setVehiculo(vehiculo);
                 mostrarVehiculo.showAndWait();
             } else {
@@ -108,7 +110,7 @@ public class ControladorVentanaPrincipal {
             cAnadirAlquiler.setAlquiler(cliente, vehiculo);
             anadirAlquiler.showAndWait();
         } else {
-            Dialogos.mostrarDialogoError("Cliente o vehículo no encontrado", "No existe ningún cliente con ese DNO o un vehículo con esa matrícula");
+            Dialogos.mostrarDialogoError("Cliente o vehículo no encontrado", "No existe ningún cliente con ese DNI o un vehículo con esa matrícula");
         }
     }
 
@@ -117,19 +119,14 @@ public class ControladorVentanaPrincipal {
         String dni = Dialogos.mostrarDialogoTexto("Buscar alquiler", "Introduce el DNI del cliente del alquiler a buscar");
         //String matricula = Dialogos.mostrarDialogoTexto("Buscar alquiler", "Introduce la matrícula del vehículo del alquiler a buscar");
         if (dni != null /*|| matricula != null*/) {
-            Cliente cliente = IUGrafica.controladorMVC.buscarCliente(dni);
+            List<Alquiler> alquileresCliente = IUGrafica.controladorMVC.obtenerAlquileresCliente(dni);
             //Vehiculo vehiculo = IUGrafica.controladorMVC.buscarVehiculo(matricula);
-            if (cliente != null /*|| vehiculo != null*/) {
-                List<Alquiler> alquileresCliente = IUGrafica.controladorMVC.obtenerAlquileresCliente(dni);
-                if (alquileresCliente != null) {
-                    cMostrarAlquiler.setAlquileresCliente(alquileresCliente);
-                    mostrarAlquiler.showAndWait();
-                } else {
-                    Dialogos.mostrarDialogoError("Alquiler no encontrado", "No existe ningún alquiler abierto para ese vehículo");
-                }
-            } else {
-                Dialogos.mostrarDialogoError("Vehículo no encontrado", "No existe ningún vehículo con esa matrícula");
+            if (alquileresCliente != null /*|| vehiculo != null*/) {
+                cMostrarAlquiler.setAlquileresCliente(alquileresCliente);
+                mostrarAlquiler.showAndWait();
             }
+        } else {
+            Dialogos.mostrarDialogoError("Cliente no encontrado", "No existe ningún Cliente con ese DNI");
         }
     }
 

@@ -7,11 +7,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import mvc.modelo.dominio.ExcepcionAlquilerVehiculos;
 import mvc.modelo.dominio.Alquiler;
+import mvc.modelo.dominio.Cliente;
 import mvc.vista.iugrafica.IUGrafica;
 import mvc.vista.iugrafica.utilidades.Dialogos;
 
 public class ControladorMostrarAlquiler {
 
+    private Cliente cliente;
     private Alquiler alquiler;
     private List<Alquiler> alquileresCliente;
 

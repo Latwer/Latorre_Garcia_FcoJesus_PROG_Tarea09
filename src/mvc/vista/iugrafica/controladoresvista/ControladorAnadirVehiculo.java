@@ -17,7 +17,7 @@ import mvc.vista.iugrafica.utilidades.Dialogos;
 public class ControladorAnadirVehiculo {
 
     private Vehiculo vehiculo;
-    
+
     @FXML
     private ComboBox<TipoVehiculo> cbTipo;
 
@@ -37,15 +37,6 @@ public class ControladorAnadirVehiculo {
         ObservableList<TipoVehiculo> tiposVehiculo = FXCollections.observableArrayList(TipoVehiculo.values());
         cbTipo.setItems(tiposVehiculo);
     }
-    /*int cilindrada = Integer.parseInt(tfCilindrada.getText());
-    int numeroPlazas = Integer.parseInt(tfNumeroPlazas.getText());
-    int pma = Integer.parseInt(tfPma.getText());
-    
-     public Vehiculo getVehiculo() {
-        DatosTecnicosVehiculo datosTecnicos = new DatosTecnicosVehiculo(cilindrada, numeroPlazas, pma);
-        nuevoVehiculo=TipoVehiculo.getTipoVehiculoSegunOrdinal(cbTipo).getInstancia(matricula, marca, modelo, datosTecnicosEntrada);
-        return nuevoVehiculo;
-    }*/
 
     public void setVehiculo(Vehiculo vehiculo) {
         if (vehiculo != null) {
