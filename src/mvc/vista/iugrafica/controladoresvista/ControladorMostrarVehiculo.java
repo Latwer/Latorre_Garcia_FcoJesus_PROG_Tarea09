@@ -17,12 +17,7 @@ import mvc.vista.iugrafica.utilidades.Dialogos;
 public class ControladorMostrarVehiculo {
 
     private Vehiculo vehiculo;
-    @FXML
-    private TextField tfTipo, tfMatricula, tfMarca, tfModelo, tfCilindrada, tfNumeroPlazas, tfPma;
-
-    @FXML
-    private Button btBorrar, btCancelar;
-
+    
     public void setVehiculo(Vehiculo vehiculo) {
         if (vehiculo != null) {
             tfTipo.setText(vehiculo.getTipoVehiculo().name());
@@ -41,7 +36,12 @@ public class ControladorMostrarVehiculo {
             tfPma.setText("");
         }
     }
+    @FXML
+    private TextField tfTipo, tfMatricula, tfMarca, tfModelo, tfCilindrada, tfNumeroPlazas, tfPma;
 
+    @FXML
+    private Button btBorrar, btCancelar;
+    
     @FXML
     private void borrarVehiculo() {
         IUGrafica.controladorMVC.borrarVehiculo(vehiculo.getMatricula());

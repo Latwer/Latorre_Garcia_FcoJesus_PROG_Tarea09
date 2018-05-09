@@ -1,6 +1,7 @@
 package mvc.vista.iugrafica.controladoresvista;
 
 import java.io.IOException;
+import java.util.List;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import mvc.modelo.dominio.Alquiler;
 import mvc.modelo.dominio.Cliente;
 import mvc.modelo.dominio.vehiculo.Vehiculo;
 import mvc.vista.iugrafica.IUGrafica;
@@ -26,6 +28,9 @@ public class ControladorVentanaPrincipal {
     private ControladorListadoVehiculos cListadoVehiculos;
     private ControladorAnadirVehiculo cAnadirVehiculo;
     private ControladorMostrarVehiculo cMostrarVehiculo;
+    private ControladorListadoAlquileres cListadoAlquileres;
+    private ControladorAnadirAlquiler cAnadirAlquiler;
+    private ControladorMostrarAlquiler cMostrarAlquiler;
     private Stage listadoClientes, anadirCliente, mostrarCliente, listadoVehiculos,
             anadirVehiculo, mostrarVehiculo, listadoAlquileres, anadirAlquiler, mostrarAlquiler;
 
@@ -89,15 +94,43 @@ public class ControladorVentanaPrincipal {
 
     @FXML
     private void listarAlquileres() {
+        cListadoAlquileres.actualizaAlquileres();
         listadoAlquileres.showAndWait();
     }
 
     @FXML
     private void anadirAlquiler() {
+        String dni = Dialogos.mostrarDialogoTexto("Añadir alquiler", "Introduce el DNI del cliente del alquiler a añadir");
+        String matricula = Dialogos.mostrarDialogoTexto("Añadir alquiler", "Introduce la matrícula del vehículo del alquiler a añadir");
+        Cliente cliente = IUGrafica.controladorMVC.buscarCliente(dni);
+        Vehiculo vehiculo = IUGrafica.controladorMVC.buscarVehiculo(matricula);
+        if (cliente != null && vehiculo != null) {
+            cAnadirAlquiler.setAlquiler(cliente, vehiculo);
+            anadirAlquiler.showAndWait();
+        } else {
+            Dialogos.mostrarDialogoError("Cliente o vehículo no encontrado", "No existe ningún cliente con ese DNO o un vehículo con esa matrícula");
+        }
     }
 
     @FXML
     private void buscarAlquiler() {
+        String dni = Dialogos.mostrarDialogoTexto("Buscar alquiler", "Introduce el DNI del cliente del alquiler a buscar");
+        //String matricula = Dialogos.mostrarDialogoTexto("Buscar alquiler", "Introduce la matrícula del vehículo del alquiler a buscar");
+        if (dni != null /*|| matricula != null*/) {
+            Cliente cliente = IUGrafica.controladorMVC.buscarCliente(dni);
+            //Vehiculo vehiculo = IUGrafica.controladorMVC.buscarVehiculo(matricula);
+            if (cliente != null /*|| vehiculo != null*/) {
+                List<Alquiler> alquileresCliente = IUGrafica.controladorMVC.obtenerAlquileresCliente(dni);
+                if (alquileresCliente != null) {
+                    cMostrarAlquiler.setAlquileresCliente(alquileresCliente);
+                    mostrarAlquiler.showAndWait();
+                } else {
+                    Dialogos.mostrarDialogoError("Alquiler no encontrado", "No existe ningún alquiler abierto para ese vehículo");
+                }
+            } else {
+                Dialogos.mostrarDialogoError("Vehículo no encontrado", "No existe ningún vehículo con esa matrícula");
+            }
+        }
     }
 
     @FXML
@@ -109,6 +142,9 @@ public class ControladorVentanaPrincipal {
             crearListadoVehiculos();
             crearAnadirVehiculo();
             crearMostrarVehiculo();
+            crearListadoAlquileres();
+            crearAnadirAlquiler();
+            crearMostrarAlquiler();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -195,5 +231,41 @@ public class ControladorVentanaPrincipal {
         mostrarVehiculo.setTitle("Mostrar vehículo");
         mostrarVehiculo.initModality(Modality.APPLICATION_MODAL);
         mostrarVehiculo.setScene(escenaMostrarVehiculo);
+    }
+
+    private void crearListadoAlquileres() throws IOException {
+        listadoAlquileres = new Stage();
+        FXMLLoader cargadorListadoAlquileres = new FXMLLoader(
+                getClass().getResource("/mvc/vista/iugrafica/vistas/ListadoAlquileres.fxml"));
+        VBox raizListadoAlquileres = (VBox) cargadorListadoAlquileres.load();
+        cListadoAlquileres = cargadorListadoAlquileres.getController();
+        Scene escenaListadoTrabajos = new Scene(raizListadoAlquileres);
+        listadoAlquileres.setTitle("Listar alquileres");
+        listadoAlquileres.initModality(Modality.APPLICATION_MODAL);
+        listadoAlquileres.setScene(escenaListadoTrabajos);
+    }
+
+    private void crearAnadirAlquiler() throws IOException {
+        anadirAlquiler = new Stage();
+        FXMLLoader cargadorAnadirAlquiler = new FXMLLoader(
+                getClass().getResource("/mvc/vista/iugrafica/vistas/AnadirAlquiler.fxml"));
+        VBox raizAnadirAlquiler = (VBox) cargadorAnadirAlquiler.load();
+        cAnadirAlquiler = cargadorAnadirAlquiler.getController();
+        Scene escenaAnadirAlquilerVehiculo = new Scene(raizAnadirAlquiler);
+        anadirAlquiler.setTitle("Añadir alquiler");
+        anadirAlquiler.initModality(Modality.APPLICATION_MODAL);
+        anadirAlquiler.setScene(escenaAnadirAlquilerVehiculo);
+    }
+
+    private void crearMostrarAlquiler() throws IOException {
+        mostrarAlquiler = new Stage();
+        FXMLLoader cargadorMostrarAlquiler = new FXMLLoader(
+                getClass().getResource("/mvc/vista/iugrafica/vistas/MostrarAlquiler.fxml"));
+        VBox raizMostrarAlquiler = (VBox) cargadorMostrarAlquiler.load();
+        cMostrarAlquiler = cargadorMostrarAlquiler.getController();
+        Scene escenaMostrarVehiculo = new Scene(raizMostrarAlquiler);
+        mostrarAlquiler.setTitle("Mostrar alquiler");
+        mostrarAlquiler.initModality(Modality.APPLICATION_MODAL);
+        mostrarAlquiler.setScene(escenaMostrarVehiculo);
     }
 }

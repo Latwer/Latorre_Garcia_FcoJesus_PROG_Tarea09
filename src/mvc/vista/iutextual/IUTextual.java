@@ -166,7 +166,6 @@ public class IUTextual implements IVistaAlquilerVehiculos {
     //@Override
     public void obtenerAlquileresAbiertos() {
         Consola.mostrarCabecera("ALQUILERES ABIERTOS");
-
         controlador.obtenerAlquileresAbiertos().forEach((alquileresAbiertos) -> {
             System.out.println(alquileresAbiertos);
         });

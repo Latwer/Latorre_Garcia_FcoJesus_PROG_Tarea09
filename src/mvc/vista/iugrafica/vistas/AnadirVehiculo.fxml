@@ -16,14 +16,14 @@
             <Label text="Modelo:" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
             <Label text="Cilindrada:" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
             <Label text="Numero de Plazas:" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+            <Label text="PMA:" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+            <ComboBox fx:id="cbTipo" prefHeight="28.0" prefWidth="232.0" visibleRowCount="3" GridPane.columnIndex="1" />
             <TextField fx:id="tfMatricula" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="tfMarca" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="tfModelo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="tfCilindrada" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="tfNumeroPlazas" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <ComboBox fx:id="cbTipo" prefHeight="28.0" prefWidth="232.0" visibleRowCount="3" GridPane.columnIndex="1" />
             <TextField fx:id="tfPma" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Label text="PMA:" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="104.0" />

@@ -29,6 +29,7 @@ public class ControladorDatosVehiculo {
 
     public void setVehiculo(Vehiculo vehiculo) {
         if (vehiculo != null) {
+            cbTipo.setValue(vehiculo.getTipoVehiculo());
             tfMatricula.setText(vehiculo.getMatricula());
             tfMarca.setText(vehiculo.getMarca());
             tfModelo.setText(vehiculo.getModelo());
@@ -36,6 +37,7 @@ public class ControladorDatosVehiculo {
             tfNumeroPlazas.setText(Integer.toString(vehiculo.getDatosTecnicos().getNumeroPlazas()));
             tfPma.setText(Integer.toString(vehiculo.getDatosTecnicos().getPma()));
         } else {
+            cbTipo.setValue(TipoVehiculo.TURISMO);
             tfMatricula.setText("");
             tfMarca.setText("");
             tfModelo.setText("");

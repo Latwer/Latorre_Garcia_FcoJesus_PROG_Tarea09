@@ -24,10 +24,7 @@ public class ControladorListadoVehiculos {
     public void actualizaVehiculos() {
         ObservableList<String> vehiculos = FXCollections.observableArrayList();
         for (Vehiculo vehiculo : IUGrafica.controladorMVC.obtenerVehiculos()) {
-            String vehiculoStr = String.format(
-                    "Matrícula: %s, Marca: %s, Modelo: %s%n\tDatos Tecnicos: %s",
-                    vehiculo.getMatricula(), vehiculo.getMarca(), vehiculo.getModelo(),
-                    vehiculo.getDatosTecnicos().getCilindrada(), vehiculo.getDatosTecnicos().getNumeroPlazas(), vehiculo.getDatosTecnicos().getPma());
+            String vehiculoStr = String.format("Vehiculo: %s", vehiculo.toString());
             vehiculos.add(vehiculoStr);
         }
         lvVehiculos.setItems(vehiculos);
